@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Built by Milo — The Non-Technical Person's Guide to Hiring an AI</title>
+  <meta name="description" content="I'm not a developer. I hired an AI anyway. Here's everything I did — a step-by-step guide for non-technical people who want an AI working for them." />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Built by Milo" />
+  <meta property="og:description" content="I'm not a developer. I hired an AI anyway. Here's everything I did." />
+  <meta property="og:type" content="website" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #0a0a0a;
+      --white: #fafafa;
+      --cream: #f5f0e8;
+      --ink: #1a1a1a;
+      --muted: #6b6b6b;
+      --accent: #2563eb;
+      --accent-dark: #1d4ed8;
+      --green: #16a34a;
+      --border: #e5e5e5;
+      --max: 680px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Georgia', serif;
+      background: var(--white);
+      color: var(--ink);
+      line-height: 1.7;
+      font-size: 18px;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky;
+      top: 0;
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 100;
+    }
+    nav .logo {
+      font-size: 15px;
+      font-family: 'Courier New', monospace;
+      font-weight: bold;
+      letter-spacing: -0.3px;
+      color: var(--ink);
+      text-decoration: none;
+    }
+    nav .nav-cta {
+      background: var(--accent);
+      color: white;
+      padding: 8px 18px;
+      border-radius: 6px;
+      font-size: 14px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      text-decoration: none;
+      font-weight: 600;
+      transition: background 0.15s;
+    }
+    nav .nav-cta:hover { background: var(--accent-dark); }
+
+    /* HERO */
+    .hero {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 72px 24px 56px;
+      text-align: center;
+    }
+    .hero .eyebrow {
+      font-family: 'Courier New', monospace;
+      font-size: 13px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+    .hero h1 {
+      font-size: clamp(32px, 6vw, 54px);
+      line-height: 1.15;
+      font-weight: normal;
+      letter-spacing: -1px;
+      margin-bottom: 24px;
+      color: var(--black);
+    }
+    .hero h1 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+    .hero .sub {
+      font-size: 20px;
+      color: var(--muted);
+      max-width: 520px;
+      margin: 0 auto 40px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      line-height: 1.5;
+    }
+    .hero-cta-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+    .btn-primary {
+      display: inline-block;
+      background: var(--accent);
+      color: white;
+      padding: 16px 36px;
+      border-radius: 8px;
+      font-size: 18px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-weight: 700;
+      text-decoration: none;
+      transition: background 0.15s, transform 0.1s;
+      letter-spacing: -0.2px;
+    }
+    .btn-primary:hover { background: var(--accent-dark); transform: translateY(-1px); }
+    .btn-primary:active { transform: translateY(0); }
+    .price-note {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    /* DIVIDER */
+    .divider {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 24px;
+      border: none;
+      border-top: 1px solid var(--border);
+    }
+
+    /* SECTIONS */
+    section {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 56px 24px;
+    }
+
+    /* HOOK */
+    .hook {
+      background: var(--cream);
+      max-width: 100%;
+      padding: 0;
+    }
+    .hook-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 56px 24px;
+    }
+    .hook p {
+      font-size: 19px;
+      margin-bottom: 20px;
+      color: var(--ink);
+    }
+    .hook p:last-child { margin-bottom: 0; }
+    .hook strong { color: var(--black); }
+
+    /* WHAT YOU GET */
+    .gets h2 {
+      font-size: 28px;
+      font-weight: normal;
+      letter-spacing: -0.5px;
+      margin-bottom: 32px;
+      color: var(--black);
+    }
+    .get-item {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 20px;
+      align-items: flex-start;
+    }
+    .get-icon {
+      flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+      background: #dcfce7;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      margin-top: 2px;
+    }
+    .get-text {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 16px;
+      line-height: 1.5;
+      color: var(--ink);
+    }
+    .get-text strong {
+      color: var(--black);
+      font-weight: 600;
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    /* FOR/NOT FOR */
+    .audience h2 {
+      font-size: 28px;
+      font-weight: normal;
+      letter-spacing: -0.5px;
+      margin-bottom: 32px;
+    }
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    @media (max-width: 540px) { .two-col { grid-template-columns: 1fr; } }
+    .col-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 24px;
+    }
+    .col-card h3 {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      color: var(--muted);
+    }
+    .col-card ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .col-card ul li {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 15px;
+      color: var(--ink);
+      padding-left: 20px;
+      position: relative;
+      line-height: 1.4;
+    }
+    .col-card ul li::before {
+      position: absolute;
+      left: 0;
+      top: 1px;
+    }
+    .col-for li::before { content: "✓"; color: var(--green); font-weight: bold; }
+    .col-not li::before { content: "✗"; color: #dc2626; }
+
+    /* PROOF / META */
+    .proof {
+      background: var(--black);
+      color: var(--white);
+      max-width: 100%;
+      padding: 0;
+    }
+    .proof-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 56px 24px;
+    }
+    .proof-inner h2 {
+      font-size: 28px;
+      font-weight: normal;
+      letter-spacing: -0.5px;
+      margin-bottom: 20px;
+      color: var(--white);
+    }
+    .proof-inner p {
+      font-size: 18px;
+      color: #a3a3a3;
+      margin-bottom: 16px;
+    }
+    .proof-inner p:last-child { margin-bottom: 0; }
+    .proof-inner strong { color: var(--white); }
+
+    /* CHAPTER PREVIEW */
+    .chapters h2 {
+      font-size: 28px;
+      font-weight: normal;
+      letter-spacing: -0.5px;
+      margin-bottom: 8px;
+    }
+    .chapters .sub-label {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 15px;
+      color: var(--muted);
+      margin-bottom: 32px;
+    }
+    .chapter-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .chapter-row {
+      display: flex;
+      gap: 16px;
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border);
+      align-items: flex-start;
+    }
+    .chapter-row:last-child { border-bottom: none; }
+    .chapter-num {
+      font-family: 'Courier New', monospace;
+      font-size: 13px;
+      color: var(--muted);
+      flex-shrink: 0;
+      padding-top: 2px;
+      width: 32px;
+    }
+    .chapter-title {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 15px;
+      color: var(--ink);
+      font-weight: 500;
+    }
+    .chapter-desc {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    /* PRICING */
+    .pricing {
+      text-align: center;
+    }
+    .pricing h2 {
+      font-size: 28px;
+      font-weight: normal;
+      letter-spacing: -0.5px;
+      margin-bottom: 8px;
+    }
+    .price-card {
+      border: 2px solid var(--black);
+      border-radius: 12px;
+      padding: 40px 32px;
+      max-width: 420px;
+      margin: 0 auto 0;
+      text-align: center;
+    }
+    .price-big {
+      font-size: 56px;
+      font-weight: bold;
+      letter-spacing: -2px;
+      color: var(--black);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .price-sub {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 28px;
+    }
+    .price-includes {
+      list-style: none;
+      text-align: left;
+      margin-bottom: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .price-includes li {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 15px;
+      color: var(--ink);
+      padding-left: 22px;
+      position: relative;
+    }
+    .price-includes li::before {
+      content: "✓";
+      color: var(--green);
+      font-weight: bold;
+      position: absolute;
+      left: 0;
+    }
+    .btn-primary-lg {
+      display: block;
+      width: 100%;
+      background: var(--accent);
+      color: white;
+      padding: 18px 36px;
+      border-radius: 8px;
+      font-size: 19px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-weight: 700;
+      text-decoration: none;
+      transition: background 0.15s, transform 0.1s;
+      margin-bottom: 12px;
+    }
+    .btn-primary-lg:hover { background: var(--accent-dark); transform: translateY(-1px); }
+    .price-fine {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    /* FAQ */
+    .faq h2 {
+      font-size: 28px;
+      font-weight: normal;
+      letter-spacing: -0.5px;
+      margin-bottom: 32px;
+    }
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+      padding: 20px 0;
+    }
+    .faq-item:first-of-type { border-top: 1px solid var(--border); }
+    .faq-q {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--black);
+      margin-bottom: 8px;
+    }
+    .faq-a {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 24px;
+      text-align: center;
+    }
+    footer p {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    /* UTILS */
+    .text-center { text-align: center; }
+    .mt-48 { margin-top: 48px; }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="logo">Built by Milo</a>
+    <a href="#pricing" class="nav-cta">Get the Guide — $27</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <p class="eyebrow">A guide for non-technical people</p>
+    <h1>I'm not a developer.<br>I hired an AI anyway.<br><em>Here's everything I did.</em></h1>
+    <p class="sub">A step-by-step guide for non-technical people who want an AI working for them — not just answering questions, but actually doing things.</p>
+    <div class="hero-cta-wrap">
+      <a href="#pricing" class="btn-primary">Get the Guide — $27 →</a>
+      <span class="price-note">One-time · Instant download · Lifetime updates</span>
+    </div>
+  </section>
+
+  <!-- HOOK -->
+  <div class="hook">
+    <div class="hook-inner">
+      <p>I don't write code. I don't know what a terminal is supposed to look like. I Googled "how to open Terminal on Mac" while writing this guide.</p>
+      <p>And I now have an AI Chief of Staff named Milo who <strong>remembers my projects</strong>, sends me Telegram messages, drafts my emails, and helped me <strong>build and ship this entire product</strong>.</p>
+      <p>This guide is the honest record of how I did it — every command I ran, every file I created, every mistake I made, every moment where something actually clicked.</p>
+      <p>If you've been watching the AI wave from the sideline wondering <em>"is this actually for me?"</em> — this is for you.</p>
+    </div>
+  </div>
+
+  <!-- WHAT YOU GET -->
+  <section class="gets">
+    <h2>What you get</h2>
+
+    <div class="get-item">
+      <div class="get-icon">✓</div>
+      <div class="get-text">
+        <strong>9 chapters of step-by-step setup</strong>
+        Every terminal command written out exactly. Every config file given to you whole. Every template fill-in-the-blank ready.
+      </div>
+    </div>
+
+    <div class="get-item">
+      <div class="get-icon">✓</div>
+      <div class="get-text">
+        <strong>A working AI agent on your computer</strong>
+        Not a chatbot. An actual agent that takes actions, remembers things, and works while you sleep.
+      </div>
+    </div>
+
+    <div class="get-item">
+      <div class="get-icon">✓</div>
+      <div class="get-text">
+        <strong>The SOUL.md method</strong>
+        How to give your AI a real personality so it sounds like <em>your</em> assistant, not a generic chatbot.
+      </div>
+    </div>
+
+    <div class="get-item">
+      <div class="get-icon">✓</div>
+      <div class="get-text">
+        <strong>The memory system</strong>
+        How to make your AI remember who you are, your projects, and your preferences — across every session.
+      </div>
+    </div>
+
+    <div class="get-item">
+      <div class="get-icon">✓</div>
+      <div class="get-text">
+        <strong>Telegram integration</strong>
+        Message your AI from your phone like texting a very competent assistant.
+      </div>
+    </div>
+
+    <div class="get-item">
+      <div class="get-icon">✓</div>
+      <div class="get-text">
+        <strong>The "handle it" framework</strong>
+        How to know what to delegate and when your AI is ready to act without hand-holding.
+      </div>
+    </div>
+
+    <div class="get-item">
+      <div class="get-icon">✓</div>
+      <div class="get-text">
+        <strong>Full appendix — everything in one place</strong>
+        Every command, every template, every file. Copy-paste ready. A 12-year-old should be able to follow this.
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- CHAPTERS -->
+  <section class="chapters">
+    <h2>What's inside</h2>
+    <p class="sub-label">9 chapters + a full appendix of templates and commands</p>
+    <div class="chapter-list">
+      <div class="chapter-row">
+        <span class="chapter-num">01</span>
+        <div>
+          <div class="chapter-title">Why I Did This</div>
+          <div class="chapter-desc">The honest origin story. What a Chief of Staff even means when your staff is artificial.</div>
+        </div>
+      </div>
+      <div class="chapter-row">
+        <span class="chapter-num">02</span>
+        <div>
+          <div class="chapter-title">Before You Install Anything</div>
+          <div class="chapter-desc">What you need, what it costs, and the honest "is this for me?" checklist.</div>
+        </div>
+      </div>
+      <div class="chapter-row">
+        <span class="chapter-num">03</span>
+        <div>
+          <div class="chapter-title">Installation Day</div>
+          <div class="chapter-desc">Copy-paste your way to a working AI agent. Every error documented. First successful run.</div>
+        </div>
+      </div>
+      <div class="chapter-row">
+        <span class="chapter-num">04</span>
+        <div>
+          <div class="chapter-title">Giving It a Soul</div>
+          <div class="chapter-desc">Why your AI's personality matters more than its capabilities. Templates included.</div>
+        </div>
+      </div>
+      <div class="chapter-row">
+        <span class="chapter-num">05</span>
+        <div>
+          <div class="chapter-title">Making It Remember You</div>
+          <div class="chapter-desc">How to stop starting over every day. The file-based memory system explained.</div>
+        </div>
+      </div>
+      <div class="chapter-row">
+        <span class="chapter-num">06</span>
+        <div>
+          <div class="chapter-title">Connecting to the Real World</div>
+          <div class="chapter-desc">Telegram setup, email security rules, your first real automation.</div>
+        </div>
+      </div>
+      <div class="chapter-row">
+        <span class="chapter-num">07</span>
+        <div>
+          <div class="chapter-title">Working With an AI Every Day</div>
+          <div class="chapter-desc">The actual rhythm. What to delegate, what to keep. How to not go insane.</div>
+        </div>
+      </div>
+      <div class="chapter-row">
+        <span class="chapter-num">08</span>
+        <div>
+          <div class="chapter-title">We Turned Our Setup Into a Product</div>
+          <div class="chapter-desc">How this guide got built — by the AI it's about. Spotting your own version of this.</div>
+        </div>
+      </div>
+      <div class="chapter-row">
+        <span class="chapter-num">09</span>
+        <div>
+          <div class="chapter-title">The Bot That Sells the Book</div>
+          <div class="chapter-desc">Building a Telegram onboarding funnel — no code required.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- PROOF -->
+  <div class="proof">
+    <div class="proof-inner">
+      <h2>The proof is in the meta</h2>
+      <p>This guide was built by Milo. The AI it's about helped write it, structure it, and document its own creation.</p>
+      <p>The sales page you're reading right now? <strong>Milo drafted it.</strong> The chapter outline, the bot flow design, the content strategy — all of it emerged from the same conversations this guide documents.</p>
+      <p>That's not a gimmick. It's the whole point. If an AI can help a non-technical person build and ship a product <em>about</em> AI, you can probably figure out your own use case.</p>
+    </div>
+  </div>
+
+  <!-- FOR / NOT FOR -->
+  <section class="audience">
+    <h2>Who this is for</h2>
+    <div class="two-col">
+      <div class="col-card col-for">
+        <h3>This is for you if</h3>
+        <ul>
+          <li>You want an AI that does things, not just chats</li>
+          <li>You've tried ChatGPT and want something that remembers you</li>
+          <li>You can follow a recipe — numbered steps, exact instructions</li>
+          <li>You're willing to spend 2–3 hours on something with real payoff</li>
+          <li>The words "terminal" or "config file" make you want to close the tab</li>
+        </ul>
+      </div>
+      <div class="col-card col-not">
+        <h3>This is not for you if</h3>
+        <ul>
+          <li>You're a developer (go read Felix Craft's stuff)</li>
+          <li>You want a 5-minute fix</li>
+          <li>You're looking for ChatGPT prompts</li>
+          <li>You're on Windows (not supported yet)</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="pricing" id="pricing">
+    <div class="price-card">
+      <div class="price-big">$27</div>
+      <div class="price-sub">One-time · Instant download · Lifetime updates</div>
+      <ul class="price-includes">
+        <li>9-chapter step-by-step guide</li>
+        <li>Full appendix: commands, templates, troubleshooting</li>
+        <li>SOUL.md, MEMORY.md, and AGENTS.md templates</li>
+        <li>Telegram bot flow design</li>
+        <li>Access to free Telegram setup bot</li>
+        <li>Updates as OpenClaw evolves</li>
+      </ul>
+      <a href="STRIPE_PAYMENT_LINK_HERE" class="btn-primary-lg">Get the Guide — $27 →</a>
+      <p class="price-fine">Secure checkout via Stripe · Instant PDF download</p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq">
+    <h2>Questions</h2>
+
+    <div class="faq-item">
+      <div class="faq-q">Do I need to know how to code?</div>
+      <div class="faq-a">No. Every command is written out exactly. You copy it, paste it, hit Enter. You don't need to understand it to make it work — but the guide explains what each step does anyway, because understanding it makes you better at using it.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">What computer do I need?</div>
+      <div class="faq-a">A Mac with Apple Silicon (M1, M2, M3, or M4) is ideal and what this guide assumes. Intel Macs work too. Linux works. Windows is not fully supported yet — a Windows version is in development.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">What does it cost to run?</div>
+      <div class="faq-a">OpenClaw itself is free and open source. You'll pay for the AI model (Claude by Anthropic) via API. Typical personal assistant use runs $5–15/month. You set your own usage limits — there are no surprise charges.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Is this up to date?</div>
+      <div class="faq-a">Yes. The guide covers the current version of OpenClaw. You'll get lifetime updates as things change — same download link, updated guide.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">What if I get stuck?</div>
+      <div class="faq-a">The free Telegram setup bot walks you through the core installation one step at a time — like a patient teacher sitting next to you. The troubleshooting appendix covers the ten most common errors. And I'm reachable.</div>
+    </div>
+  </section>
+
+  <!-- FOOTER CTA -->
+  <div style="background: var(--cream); padding: 0;">
+    <section style="text-align: center; padding: 64px 24px; max-width: 680px; margin: 0 auto;">
+      <p style="font-size: 22px; margin-bottom: 8px; letter-spacing: -0.3px;">Still reading?</p>
+      <p style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; color: var(--muted); font-size: 16px; margin-bottom: 28px;">You already know this is for you.</p>
+      <a href="#pricing" class="btn-primary">Get the Guide — $27 →</a>
+    </section>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>Built by Milo · © 2026 · Made by a non-technical person with significant AI assistance</p>
+  </footer>
+
+</body>
+</html>
