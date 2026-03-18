@@ -333,6 +333,48 @@
       margin-top: 2px;
     }
 
+    /* LANG SELECTOR */
+    .lang-select-wrap {
+      margin-bottom: 24px;
+    }
+    .lang-select-label {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+    .lang-options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+    }
+    .lang-btn {
+      background: var(--white);
+      border: 1.5px solid var(--border);
+      border-radius: 20px;
+      padding: 7px 16px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 14px;
+      color: var(--ink);
+      cursor: pointer;
+      transition: border-color 0.12s, background 0.12s, color 0.12s;
+      white-space: nowrap;
+    }
+    .lang-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+    .lang-btn.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: white;
+      font-weight: 600;
+    }
+
     /* PRICING */
     .pricing {
       text-align: center;
@@ -457,7 +499,7 @@
   <!-- NAV -->
   <nav>
     <a href="#" class="logo">Built by Milo</a>
-    <a href="#pricing" class="nav-cta">Get the Guide — $27</a>
+    <button id="nav-buy-btn" class="nav-cta" style="border:none;cursor:pointer;">Get the Guide — $27</button>
   </nav>
 
   <!-- HERO -->
@@ -467,7 +509,7 @@
     <p class="sub">A step-by-step guide for non-technical people who want an AI working for them — not just answering questions, but actually doing things.</p>
     <div class="hero-cta-wrap">
       <a href="#pricing" class="btn-primary">Get the Guide — $27 →</a>
-      <span class="price-note">One-time · Instant download · Lifetime updates</span>
+      <span class="price-note">One-time · Instant download · Lifetime updates · 6 languages</span>
     </div>
   </section>
 
@@ -665,8 +707,23 @@
         <li>Telegram bot flow design</li>
         <li>Access to free Telegram setup bot</li>
         <li>Updates as OpenClaw evolves</li>
+        <li>Available in 6 languages</li>
       </ul>
-      <a href="https://buy.stripe.com/dRmaER9VW6NOeE6c0B9sk00" class="btn-primary-lg">Get the Guide — $27 →</a>
+
+      <!-- LANGUAGE SELECTOR -->
+      <div class="lang-select-wrap">
+        <p class="lang-select-label">Choose your language</p>
+        <div class="lang-options">
+          <button class="lang-btn active" data-lang="en">🇺🇸 English</button>
+          <button class="lang-btn" data-lang="fr">🇫🇷 Français</button>
+          <button class="lang-btn" data-lang="de">🇩🇪 Deutsch</button>
+          <button class="lang-btn" data-lang="es">🇪🇸 Español</button>
+          <button class="lang-btn" data-lang="zh-hans">🇨🇳 简体中文</button>
+          <button class="lang-btn" data-lang="zh-hant">🇹🇼 繁體中文</button>
+        </div>
+      </div>
+
+      <button id="buy-btn-main" class="btn-primary-lg">Get the Guide — $27 →</button>
       <p class="price-fine">Secure checkout via Stripe · Instant PDF download</p>
     </div>
   </section>
@@ -706,7 +763,7 @@
     <section style="text-align: center; padding: 64px 24px; max-width: 680px; margin: 0 auto;">
       <p style="font-size: 22px; margin-bottom: 8px; letter-spacing: -0.3px;">Still reading?</p>
       <p style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; color: var(--muted); font-size: 16px; margin-bottom: 28px;">You already know this is for you.</p>
-      <a href="#pricing" class="btn-primary">Get the Guide — $27 →</a>
+      <button id="footer-buy-btn" class="btn-primary" style="border:none;cursor:pointer;">Get the Guide — $27 →</button>
     </section>
   </div>
 
@@ -714,6 +771,38 @@
   <footer>
     <p>Built by Milo · © 2026 · Made by a non-technical person with significant AI assistance</p>
   </footer>
+
+  <script>
+    const STRIPE_LINK = 'https://buy.stripe.com/dRmaER9VW6NOeE6c0B9sk00';
+    let selectedLang = 'en';
+
+    // Language pill selection
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        selectedLang = btn.dataset.lang;
+      });
+    });
+
+    function goToCheckout() {
+      window.location.href = STRIPE_LINK + '?client_reference_id=' + selectedLang;
+    }
+
+    // Wire up all buy buttons
+    document.getElementById('buy-btn-main').addEventListener('click', goToCheckout);
+    document.getElementById('footer-buy-btn').addEventListener('click', goToCheckout);
+
+    // Nav button: scroll to pricing if already on page, else go to checkout
+    document.getElementById('nav-buy-btn').addEventListener('click', () => {
+      const pricing = document.getElementById('pricing');
+      if (pricing) {
+        pricing.scrollIntoView({ behavior: 'smooth' });
+      } else {
+        goToCheckout();
+      }
+    });
+  </script>
 
 </body>
 </html>
